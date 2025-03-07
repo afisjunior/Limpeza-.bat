@@ -23,6 +23,12 @@ echo - Cache de aplicativos limpo, Cookies de Sites e etc
 echo - Historico de execucao limpo, Arquivos temporarios de navegadores
 echo - Arquivos de crash removidos, Limpar a lixeira
 echo - Arquivos do Bloxstrap limpos, Arquivos de Jogos em geral
+echo - Cache de Shaders de jogos, Cache de DirectX
+echo - Arquivos temporarios de atualizacoes do Windows
+echo - Cache de fontes do sistema
+echo - Arquivos temporarios de instaladores
+echo - Cache de apps do Windows Store
+echo - Arquivo de hibernacao e pagina de memoria
 echo.
 echo.
 echo Deseja continuar com a limpeza? (S/N)
@@ -68,6 +74,45 @@ for %%D in ("%localappdata%" "%appdata%" "%temp%" "%windows%") do (
 
 echo Iniciando processo de limpeza... >> "%logfile%"
 
+powercfg -h off
+del /s /f /q "%systemdrive%\hiberfil.sys" 2>nul
+del /s /f /q "%systemdrive%\pagefile.sys" 2>nul
+powercfg -h on
+
+del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db" 2>nul
+del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\iconcache_*.db" 2>nul
+del /s /f /q "%localappdata%\Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\LocalCache\*.*" 2>nul
+del /s /f /q "%localappdata%\Packages\*\LocalCache\*.*" 2>nul
+del /s /f /q "%localappdata%\Microsoft\Windows\Fonts\Cache\*.*" 2>nul
+del /s /f /q "%windir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.*" 2>nul
+del /s /f /q "%localappdata%\D3DSCache\*.*" 2>nul
+del /s /f /q "%windir%\DirectX Shader Cache\*.*" 2>nul
+del /s /f /q "%localappdata%\Steam\htmlcache\*.*" 2>nul
+del /s /f /q "%programdata%\Epic\EpicGamesLauncher\Data\Manifests\*.*" 2>nul
+del /s /f /q "%localappdata%\Riot Games\Metadata\*.*" 2>nul
+del /s /f /q "%localappdata%\Microsoft\VisualStudio\*.log" 2>nul
+del /s /f /q "%appdata%\Microsoft\VisualStudio\*.suo" 2>nul
+del /s /f /q "%localappdata%\Microsoft\Media Player\*.*" 2>nul
+del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\ThumbCacheToDelete\*.*" 2>nul
+net stop wuauserv 2>nul
+net stop bits 2>nul
+del /s /f /q "%windir%\SoftwareDistribution\Download\*.*" 2>nul
+net start wuauserv 2>nul
+net start bits 2>nul
+del /s /f /q "%windir%\Microsoft.NET\Framework\v*\Temporary ASP.NET Files\*.*" 2>nul
+del /s /f /q "%windir%\Microsoft.NET\Framework64\v*\Temporary ASP.NET Files\*.*" 2>nul
+del /s /f /q "%appdata%\Microsoft\Teams\Cache\*.*" 2>nul
+del /s /f /q "%appdata%\Microsoft\Teams\blob_storage\*.*" 2>nul
+del /s /f /q "%appdata%\Microsoft\Teams\databases\*.*" 2>nul
+del /s /f /q "%appdata%\Microsoft\Teams\GPUCache\*.*" 2>nul
+del /s /f /q "%appdata%\Slack\Cache\*.*" 2>nul
+del /s /f /q "%appdata%\Discord\Cache\*.*" 2>nul
+del /s /f /q "%appdata%\Discord\Code Cache\*.*" 2>nul
+del /s /f /q "%appdata%\Adobe\Common\Media Cache Files\*.*" 2>nul
+del /s /f /q "%appdata%\Adobe\Common\Media Cache\*.*" 2>nul
+del /s /f /q "%appdata%\Adobe\Common\Team Projects Cache\*.*" 2>nul
+del /s /f /q "%programdata%\Microsoft\Windows Defender\Scans\History\Results\Quick\*.*" 2>nul
+del /s /f /q "%programdata%\Microsoft\Windows Defender\Scans\History\Results\Resource\*.*" 2>nul
 del /s /f /q "%windows%\temp\*.*" 2>nul
 del /s /f /q "%windows%\Prefetch\*.exe" 2>nul
 del /s /f /q "%windows%\Prefetch\*.dll" 2>nul
@@ -127,77 +172,11 @@ del /s /f /q "%windir%\Microsoft.NET\Framework64\*\Temporary ASP.NET Files\*.*" 
 del /s /f /q "%userprofile%\AppData\Local\Packages\*\SystemAppData\*.*" 2>nul
 del /s /f /q "%localappdata%\Bloxstrap\Downloads\*.*" 2>nul
 del /s /f /q "%localappdata%\Bloxstrap\Logs\*.*" 2>nul
-del /s /f /q "%localappdata%\D3DSCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\NVIDIA\DXCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\AMD\DxCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\AMD\GLCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Intel\GLCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\D3DSCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\EpicGamesLauncher\Saved\Logs\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Steam\htmlcache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\XboxLive\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\CrashDumps\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\WebCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\INetCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\WER\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Terminal Server Client\Cache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\Caches\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Temp\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Packages\Microsoft.Windows.StartMenuExperienceHost_*\TempState\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\History\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\CLR_v4.0\UsageLogs\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\CLR_v4.0_32\UsageLogs\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Internet Explorer\Recovery\*.*" >nul 2>&1
-del /s /f /q "%systemroot%\Temp\*.*" >nul 2>&1
-del /s /f /q "%systemroot%\Minidump\*.*" >nul 2>&1
-del /s /f /q "%systemroot%\Prefetch\*.*" >nul 2>&1
-del /s /f /q "%userprofile%\AppData\Local\Temp\*.*" >nul 2>&1
-del /s /f /q "%userprofile%\Recent\*.*" >nul 2>&1
-del /s /f /q "%windir%\Memory.dmp" >nul 2>&1
-del /s /f /q "%windir%\*.log" >nul 2>&1
-del /s /f /q "%windir%\System32\LogFiles\*.*" >nul 2>&1
-del /s /f /q "%windir%\Logs\*.*" >nul 2>&1
-del /s /f /q "%windir%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*.*" >nul 2>&1
-del /s /f /q "%windir%\SoftwareDistribution\Download\*.*" >nul 2>&1
-del /s /f /q "%windir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.*" >nul 2>&1
-del /s /f /q "%programdata%\Microsoft\Windows\WER\*.*" >nul 2>&1
-del /s /f /q "%programdata%\NVIDIA Corporation\NV_Cache\*.*" >nul 2>&1
-del /s /f /q "%programdata%\AMD\Shader Cache\*.*" >nul 2>&1
-del /s /f /q "%systemdrive%\$Recycle.bin\*.*" >nul 2>&1
-del /s /f /q "%systemdrive%\Config.Msi\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Adobe\Common\Media Cache Files\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Microsoft\Teams\Cache\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Microsoft\Windows\Recent\AutomaticDestinations\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Microsoft\Windows\Recent\CustomDestinations\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Discord\Cache\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Spotify\Data\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Zoom\Logs\*.*" >nul 2>&1
-del /s /f /q "%appdata%\Microsoft\Office\Recent\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Opera Software\Opera GX Stable\Cache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Google\Chrome\User Data\Default\Cache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Edge\User Data\Default\Cache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Mozilla\Firefox\Profiles\*\cache2\entries\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\BraveSoftware\Brave-Browser\User Data\Default\Cache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\iconcache_*.db" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\Explorer\iconcache_*.db" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\INetCache\IE\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\INetCache\Low\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\INetCache\Content.IE5\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\WER\ReportArchive\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\WER\ReportQueue\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Packages\*\AC\INetCache\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Packages\*\AC\Temp\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Packages\*\AC\TokenBroker\Cache\*.*" >nul 2>&1
-del /s /f /q "%windir%\SoftwareDistribution\*.*" >nul 2>&1
-del /s /f /q "%windir%\System32\DriverStore\Temp\*.*" >nul 2>&1
-del /s /f /q "%windir%\SoftwareDistribution\DeliveryOptimization\*.*" >nul 2>&1
-del /s /f /q "%localappdata%\Microsoft\Windows\D3DSCache\*.*"
 
-echo Executando comandos finais de limpeza... >> "%logfile%"
-wsreset.exe >nul 2>&1
 ipconfig /flushdns >nul 2>&1
-taskkill /F /IM WinStore.App.exe >nul 2>&1
+ie4uinit.exe -show >nul 2>&1
+fc /s >nul 2>&1
+wsreset.exe >nul 2>&1
 
 echo ================================= >> "%logfile%"
 echo Resumo da Limpeza: >> "%logfile%"
