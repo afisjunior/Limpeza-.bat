@@ -178,6 +178,10 @@ ie4uinit.exe -show >nul 2>&1
 fc /s >nul 2>&1
 wsreset.exe >nul 2>&1
 
+timeout /t 3 >nul
+
+taskkill /F /IM WinStore.App.exe >nul 2>&1
+
 echo ================================= >> "%logfile%"
 echo Resumo da Limpeza: >> "%logfile%"
 echo. >> "%logfile%"
